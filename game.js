@@ -51,7 +51,7 @@ class GameSession {
   endGame(outcome) {
       this.gameOver = true;
       disableAllCards();
-      computeFinalScore();
+      this.computeFinalScore();
 
       console.log('Your score is ' + this.score)
       if (outcome === 'won') {
