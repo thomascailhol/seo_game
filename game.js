@@ -355,7 +355,7 @@ function hideRules() {
 }
 
 function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score) {
-  const gameSessionsTable = supabase.from('Game');
+  const gameSessionsTable = sp.from('Game');
 
   gameSessionsTable.insert([
       { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score }
