@@ -57,7 +57,7 @@ class GameSession {
           console.log('You lost!');
       }
 
-      submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.position);
+      submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.position, this.query.name);
   }
 }
 
@@ -374,11 +374,11 @@ function hideRules() {
   rules.classList.add('hidden');
 }
 
-function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score) {
+function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score, query) {
   const gameSessionsTable = sp.from('Game');
 
   gameSessionsTable.insert([
-      { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score }
+      { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score, query: query }
   ]).then(result => {
       console.log('Game session submitted to Supabase:', result);
   }).catch(error => {
