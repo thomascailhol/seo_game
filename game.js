@@ -59,7 +59,7 @@ class GameSession {
           console.log('You lost!');
       }
 
-      submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.position, this.query.name, this.score);
+      submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.score, this.query.name, this.score);
   }
 }
 
