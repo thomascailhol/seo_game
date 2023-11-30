@@ -25,13 +25,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 class GameSession {
-  constructor(query, playerName) {
+  constructor(query, queryIndex, playerName) {
       this.query = query;
       this.score = 0;
       this.position = 15;
       this.usedCards = [];
       this.gameOver = false;
       this.playerName = playerName;
+      this.queryIndex = queryIndex;
   }
 
   chooseCard(index) {
@@ -50,7 +51,8 @@ class GameSession {
   endGame(outcome) {
       this.gameOver = true;
       disableAllCards();
-
+      this.score = this.position - queries[this.queryIndex].ranking.length;
+      console.log('Your score is ' + this.score)
       if (outcome === 'won') {
           console.log('You won!');
       } else {
@@ -151,7 +153,7 @@ function toggleRules() {
 function startNewSession(queryIndex, playerName) {
   const selectedQuery = queries[queryIndex];
   console.log('Starting new session with query:', selectedQuery);
-  currentSession = new GameSession(selectedQuery, playerName);
+  currentSession = new GameSession(selectedQuery, queryIndex, playerName);
 
   hideRules();
   hideQueries();
@@ -183,7 +185,7 @@ function onCardChoice(index, cardElement) {
   // cardElement.classList.remove('game-card');
   cardElement.removeEventListener('click', cardClickHandler);
 
-  updateGameState(index);
+  // updateGameState(index);
 
   // checkForEndGame();
 
@@ -197,9 +199,8 @@ function hideQueries() {
 }
 
 function updateGameState(index) {
-  const card = currentSession.query.cards[index];
   console.log("Impact: " + card.impact  + " Score: " + currentSession.score)
-  currentSession.score += card.impact;
+  // currentSession.score = currentSession.position - queries;
 }
 
 function checkForEndGame() {
