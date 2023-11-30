@@ -126,7 +126,7 @@ function toggleRules() {
 }
 
 function startNewSession(queryIndex) {
-
+  console.log(sp);
   const playerName = "Thomas";
   console.log('Welcome to the game, ' + playerName + '!');
   const selectedQuery = queries[queryIndex];
