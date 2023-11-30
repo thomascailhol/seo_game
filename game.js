@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       console.log('display rules');
       toggleRules();
   });
-  const form = document.getElementById('newPlayerForm'); // Replace with your form's ID
+  const form = document.getElementById('new-player-form'); // Replace with your form's ID
   form.addEventListener('submit', function(event) {
       event.preventDefault();
       submitPlayerName();
