@@ -364,10 +364,3 @@ function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score
       console.error('Error submitting game session to Supabase:', error);
   });
 }
-
-const { data, error } = await supabase
-  .from('Game')
-  .insert([
-    { some_column: 'someValue', other_column: 'otherValue' },
-  ])
-  .select()
