@@ -375,11 +375,11 @@ function hideRules() {
   rules.classList.add('hidden');
 }
 
-function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score, query) {
+function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score, query, total_impact) {
   const gameSessionsTable = sp.from('Game');
 
   gameSessionsTable.insert([
-      { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score, query: query, total_impact: score }
+      { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score, query: query, total_impact: total_impact }
   ]).then(result => {
       console.log('Game session submitted to Supabase:', result);
   }).catch(error => {
