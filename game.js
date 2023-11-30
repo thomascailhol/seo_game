@@ -57,7 +57,7 @@ class GameSession {
           console.log('You lost!');
       }
 
-      submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.position, this.query.name);
+      submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.position, this.query.name, this.score);
   }
 }
 
@@ -378,7 +378,7 @@ function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score
   const gameSessionsTable = sp.from('Game');
 
   gameSessionsTable.insert([
-      { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score, query: query }
+      { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score, query: query, total_impact: score }
   ]).then(result => {
       console.log('Game session submitted to Supabase:', result);
   }).catch(error => {
