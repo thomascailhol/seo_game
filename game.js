@@ -62,6 +62,17 @@ class GameSession {
 
       submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.score, this.query.name, this.score);
   }
+
+
+  computeFinalScore() {
+    if (this.position === 1) {
+      this.score = 15;
+    } else if (this.position === (queries[this.queryIndex].ranking.length + 1)) {
+      this.score = 0;
+    } else {
+      this.score = (queries[this.queryIndex].ranking.length + 1) - this.position;
+    }
+  }
 }
 
 const queries = [
@@ -375,16 +386,6 @@ function disableAllCards() {
 function hideRules() {
   const rules = document.getElementById('rules');
   rules.classList.add('hidden');
-}
-
-function computeFinalScore() {
-  if (this.position === 1) {
-    this.score = 15;
-  } else if (this.position === (queries[this.queryIndex].ranking.length + 1)) {
-    this.score = 0;
-  } else {
-    this.score = (queries[this.queryIndex].ranking.length + 1) - this.position;
-  }
 }
 
 function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score, query, total_impact) {
