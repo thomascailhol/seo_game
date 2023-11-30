@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+  const sp = 
+    supabase.createClient('https://fyggsmdxumjqcmqkdizz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2dzbWR4dW1qcWNtcWtkaXp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEzMzU3NTYsImV4cCI6MjAxNjkxMTc1Nn0.c_-UlBxlaFZZcj9FKr8u33r2TE7KZSt_-MzijCPlB94');
   const startGameButton = document.getElementById('start-game');
   const rulesButton = document.getElementById('rules-button');
   // add event listenier to start game button
@@ -352,7 +354,7 @@ function hideRules() {
 }
 
 function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score) {
-  const gameSessionsTable = supabase.from('games');
+  const gameSessionsTable = supabase.from('Game');
 
   gameSessionsTable.insert([
       { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score }
@@ -362,3 +364,10 @@ function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score
       console.error('Error submitting game session to Supabase:', error);
   });
 }
+
+const { data, error } = await supabase
+  .from('Game')
+  .insert([
+    { some_column: 'someValue', other_column: 'otherValue' },
+  ])
+  .select()
