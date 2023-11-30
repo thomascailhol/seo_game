@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   const sp = 
     supabase.createClient('https://fyggsmdxumjqcmqkdizz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2dzbWR4dW1qcWNtcWtkaXp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEzMzU3NTYsImV4cCI6MjAxNjkxMTc1Nn0.c_-UlBxlaFZZcj9FKr8u33r2TE7KZSt_-MzijCPlB94');
+  console.log(sp);
   const startGameButton = document.getElementById('start-game');
   const rulesButton = document.getElementById('rules-button');
   // add event listenier to start game button
