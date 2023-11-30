@@ -126,7 +126,8 @@ function startNewSession(queryIndex) {
 
   const playerName = "Thomas";
   console.log('Welcome to the game, ' + playerName + '!');
-  console.log('Starting new session with query:', queries[queryIndex].name);
+  const selectedQuery = queries[queryIndex];
+  console.log('Starting new session with query:', selectedQuery);
   currentSession = new GameSession(selectedQuery, playerName);
 
   hideRules();
