@@ -128,7 +128,7 @@ function toggleMenu() {
 }
 
 function togglePlayerInput() {
-  const playerInput = document.getElementById('player-input');
+  const playerInput = document.getElementById('player-wrapper');
   playerInput.classList.toggle('hidden');
 }
 
