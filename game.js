@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  console.log('init seo game');
+  console.log('Hello from JsDelivr');
   const startGameButton = document.getElementById('start-game');
   const rulesButton = document.getElementById('rules-button');
   // add event listenier to start game button
