@@ -167,7 +167,7 @@ function onCardChoice(index, cardElement) {
 
   updateGameState(index);
 
-  checkForEndGame();
+  // checkForEndGame();
 
   // updateScoreDisplay();
   updateRankingDisplay();
