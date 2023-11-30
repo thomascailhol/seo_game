@@ -198,6 +198,7 @@ function hideQueries() {
 
 function updateGameState(index) {
   const card = currentSession.query.cards[index];
+  console.log("Impact: " + card.impact  + " Score: " + currentSession.score)
   currentSession.score += card.impact;
 }
 
