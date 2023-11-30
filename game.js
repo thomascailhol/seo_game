@@ -10,12 +10,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
   startGameButton.addEventListener('click', function () {
       console.log('display queries');
       toggleMenu();
-      displayQueries();
+      togglePlayerInput();
   });
   // add event listener to rules button
   rulesButton.addEventListener('click', function () {
       console.log('display rules');
       toggleRules();
+  });
+  const form = document.getElementById('newPlayerForm'); // Replace with your form's ID
+  form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      submitPlayerName();
   });
 });
 
@@ -97,7 +102,9 @@ const queries = [
 
 let currentSession;
 
-function displayQueries() {
+function displayQueries(playerName) {
+  const queriesWrapper = document.getElementById('queries-wrapper');
+  queriesWrapper.classList.remove('hidden');
   const queriesContainer = document.getElementById('queries-container');
   queriesContainer.innerHTML = '';
 
@@ -106,7 +113,7 @@ function displayQueries() {
       queryButton.className = 'keyword';
       queryButton.textContent = query.name;
       queryButton.addEventListener('click', function() {
-          startNewSession(index);
+          startNewSession(index, playerName);
       });
 
       queriesContainer.appendChild(queryButton);
@@ -120,6 +127,20 @@ function toggleMenu() {
   gameGrid.classList.toggle('hidden');
 }
 
+function togglePlayerInput() {
+  const playerInput = document.getElementById('player-input');
+  playerInput.classList.toggle('hidden');
+}
+
+function submitPlayerName() {
+  const playerNameInput = document.getElementById('player-name');
+  const playerName = playerNameInput.value;
+  console.log('Player name:', playerName);
+  displayQueries(playerName);
+  togglePlayerInput();
+  // toggleMenu();
+}
+
 function toggleRules() {
   const menu = document.getElementById('menu');
   menu.classList.toggle('hidden');
@@ -127,10 +148,7 @@ function toggleRules() {
   rules.classList.toggle('hidden');
 }
 
-function startNewSession(queryIndex) {
-  console.log(sp);
-  const playerName = "Thomas";
-  console.log('Welcome to the game, ' + playerName + '!');
+function startNewSession(queryIndex, playerName) {
   const selectedQuery = queries[queryIndex];
   console.log('Starting new session with query:', selectedQuery);
   currentSession = new GameSession(selectedQuery, playerName);
