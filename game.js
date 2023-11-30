@@ -110,7 +110,7 @@ function displayQueries(playerName) {
 
   queries.forEach((query, index) => {
       const queryButton = document.createElement('a');
-      queryButton.className = 'keyword';
+      queryButton.className = 'query';
       queryButton.textContent = query.name;
       queryButton.addEventListener('click', function() {
           startNewSession(index, playerName);
@@ -154,9 +154,9 @@ function startNewSession(queryIndex, playerName) {
   currentSession = new GameSession(selectedQuery, playerName);
 
   hideRules();
-  hideKeywords();
+  hideQueries();
   displayCards(selectedQuery['cards']);
-  displayKeyword(selectedQuery['name']);
+  displayQuery(selectedQuery['name']);
   currentSession.score = 0;
   // updateScoreDisplay();
   updateRankingDisplay();
@@ -191,9 +191,9 @@ function onCardChoice(index, cardElement) {
   updateRankingDisplay();
 }
 
-function hideKeywords() {
-  const keywordDisplay = document.getElementById('keywords-wrapper');
-  keywordDisplay.textContent = '';
+function hideQueries() {
+  const queryDisplay = document.getElementById('queries-wrapper');
+  queryDisplay.textContent = '';
 }
 
 function updateGameState(index) {
@@ -214,9 +214,9 @@ function updateScoreDisplay() {
   scoreDisplay.textContent = "Score: " + currentSession.score;
 }
 
-function displayKeyword(keyword) {
-  const keywordDisplay = document.getElementById('keyword');
-  keywordDisplay.textContent = keyword;
+function displayQuery(query) {
+  const queryDisplay = document.getElementById('query');
+  queryDisplay.textContent = query;
 }
 
 function updateRankingDisplay() {
