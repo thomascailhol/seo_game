@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  console.log(supabase);
   const startGameButton = document.getElementById('start-game');
   const rulesButton = document.getElementById('rules-button');
   // add event listenier to start game button
@@ -16,12 +15,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 class GameSession {
-  constructor(query) {
+  constructor(query, playerName) {
       this.query = query;
       this.score = 0;
       this.position = 15;
       this.usedCards = [];
       this.gameOver = false;
+      this.playerName = playerName;
   }
 
   chooseCard(index) {
@@ -46,6 +46,8 @@ class GameSession {
       } else {
           console.log('You lost!');
       }
+
+      submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.position);
   }
 }
 
@@ -345,4 +347,16 @@ function disableAllCards() {
 function hideRules() {
   const rules = document.getElementById('rules');
   rules.classList.add('hidden');
+}
+
+function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score) {
+  const gameSessionsTable = supabase.from('games');
+
+  gameSessionsTable.insert([
+      { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score }
+  ]).then(result => {
+      console.log('Game session submitted to Supabase:', result);
+  }).catch(error => {
+      console.error('Error submitting game session to Supabase:', error);
+  });
 }
