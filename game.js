@@ -1,5 +1,4 @@
 let sp;
-let queries;
 
 document.addEventListener('DOMContentLoaded', (event) => {
   sp =
@@ -97,7 +96,6 @@ async function collectQueries() {
   try {
     const queries = await fetchQueries();
     console.log('Queries:', queries);
-    queries = queries;
   } catch (error) {
     // Handle errors here if needed
     console.error('Error collecting queries:', error);
