@@ -77,7 +77,7 @@ class GameSession {
 
 // Call the function
 
-async function getQueries() {
+async function fetchQueries() {
   const queryTable = sp.from('Query');
 
   try {
@@ -92,14 +92,19 @@ async function getQueries() {
 
 let queries;
 
-getQueries()
-  .then(data => {
-    console.log('Queries:', data);
-    queries = data;
-  })
-  .catch(error => {
+// Call the function using await (inside an async function) or then() if you prefer
+async function collectQueries() {
+  try {
+    const queries = await getQueries();
+    console.log('Queries:', queries);
+    queries = queries;
+  } catch (error) {
     // Handle errors here if needed
-  });
+    console.error('Error collecting queries:', error);
+  }
+}
+
+collectQueries();
 
 let currentSession;
 
