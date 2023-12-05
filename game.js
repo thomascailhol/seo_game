@@ -158,7 +158,7 @@ function startNewSession(queryIndex, playerName) {
 
   hideRules();
   hideQueries();
-  displayCards(currentSession[queryIndex].cards);
+  displayCards(queries[currentSession.queryIndex].cards);
   // displayQuery(selectedQuery['name']);
   currentSession.score = 0;
   // updateScoreDisplay();
