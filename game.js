@@ -69,10 +69,10 @@ class GameSession {
   computeFinalScore() {
     if (this.position === 1) {
       this.score = 15;
-    } else if (this.position === (queries[this.queryIndex].ranking.length + 1)) {
+    } else if (this.position === (queries[this.queryIndex].ranking.results.length + 1)) {
       this.score = 0;
     } else {
-      this.score = (queries[this.queryIndex].ranking.length + 1) - this.position;
+      this.score = (queries[this.queryIndex].ranking.results.length + 1) - this.position;
     }
   }
 }
