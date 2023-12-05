@@ -1,4 +1,5 @@
 let sp;
+let queries;
 
 document.addEventListener('DOMContentLoaded', (event) => {
   sp =
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     event.preventDefault();
     submitPlayerName();
   });
+  collectQueries();
 });
 
 class GameSession {
@@ -90,8 +92,6 @@ async function fetchQueries() {
   }
 }
 
-let queries;
-
 // Call the function using await (inside an async function) or then() if you prefer
 async function collectQueries() {
   try {
@@ -103,8 +103,6 @@ async function collectQueries() {
     console.error('Error collecting queries:', error);
   }
 }
-
-collectQueries();
 
 let currentSession;
 
