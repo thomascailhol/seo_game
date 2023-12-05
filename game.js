@@ -95,7 +95,7 @@ let queries;
 // Call the function using await (inside an async function) or then() if you prefer
 async function collectQueries() {
   try {
-    const queries = await getQueries();
+    const queries = await fetchQueries();
     console.log('Queries:', queries);
     queries = queries;
   } catch (error) {
