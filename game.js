@@ -227,7 +227,7 @@ function updateRankingDisplay() {
   googleResultsDiv.innerHTML = '';
   updateUsedCardsCount();
 
-  const results = [...queries[0].ranking]; // Clone the ranking array
+  const results = [...queries[currentSession.queryIndex].ranking.results]; // Clone the ranking array
   const userSite = {
     id: 15, // Assign a unique ID for the user's site
     title: 'Your Site', // Custom title for the user's site
