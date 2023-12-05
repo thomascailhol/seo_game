@@ -75,44 +75,9 @@ class GameSession {
   }
 }
 
-const queries = [
-{
-      name: 'learn digital marketing',
-      cards: [
-          { id: 1, name: 'Optimize for Educational Keywords', description: 'Focus on keywords related to digital marketing courses and tutorials.', impact: 3, color: '#000' },
-          { id: 2, name: 'Develop Engaging Course Content', description: 'Create engaging and informative content for digital marketing learners.', impact: 4, color: '#000' },
-          { id: 3, name: 'Utilize Video Tutorials', description: 'Incorporate video tutorials to enhance learning experiences.', impact: 2, color: '#000' },
-          { id: 4, name: 'Leverage Influencer Collaborations', description: 'Collaborate with digital marketing influencers for wider reach.', impact: 3, color: '#000' },
-          { id: 5, name: 'Implement User-Friendly Design', description: 'Ensure the website is easy to navigate for all users.', impact: 2, color: '#000' },
-          { id: 6, name: 'Use Irrelevant Keywords', description: 'Sprinkle some random keywords like \'unicorn\' for that magical SEO touch.', impact: -2, color: '#000' },
-          { id: 7, name: 'Ignore Mobile Optimization', description: 'Who needs mobile users anyway? Desktop is where it’s at!', impact: -3, color: '#000' },
-          { id: 8, name: 'Spammy Backlinks Galore', description: 'Get backlinks from every corner of the internet, relevance optional.', impact: -2, color: '#000' },
-          { id: 9, name: 'Overuse Jargon', description: 'Use complex digital marketing jargon to confuse and impress.', impact: -1, color: '#000' },
-          { id: 10, name: 'Duplicate Content', description: 'Why create new content when you can copy-paste?', impact: -4, color: '#000' },
-          { id: 11, name: 'Engage with Alumni Reviews', description: 'Encourage alumni to leave reviews for credibility.', impact: 2, color: '#000' },
-          { id: 12, name: 'Host Interactive Webinars', description: 'Increase engagement through live webinars and Q&A sessions.', impact: 3, color: '#000' },
-          { id: 13, name: 'Create Downloadable Resources', description: 'Offer downloadable ebooks and worksheets for extra learning.', impact: 2, color: '#000' },
-          { id: 14, name: 'Optimize Course Descriptions', description: 'Write clear and compelling descriptions for each course.', impact: 3, color: '#000' },
-          { id: 15, name: 'Use Data-Driven Insights', description: 'Analyze website data to continuously improve your strategies.', impact: 2, color: '#000' }
-      ],
-      ranking: [
-          { id: 1, title: 'Digital Marketing Pro Courses', url: 'https://www.digitalmarketingpro.com', description: 'Master digital marketing with our advanced professional courses.' },
-          { id: 2, title: 'Easy Learn Digital', url: 'https://www.easylearndigital.com', description: 'Beginner-friendly digital marketing courses to kickstart your career.' },
-          { id: 3, title: 'Market Masters Academy', url: 'https://www.marketmastersacademy.com', description: 'Learn from the masters to become a digital marketing expert.' },
-          { id: 4, title: 'Techie Marketeers', url: 'https://www.techmarketeers.com', description: 'Tech-savvy digital marketing courses for the modern learner.' },
-          { id: 5, title: 'Creative Digital School', url: 'https://www.creativedigitalschool.com', description: 'Blend creativity and technology with our unique digital marketing curriculum.' },
-          { id: 6, title: 'NextGen Marketers', url: 'https://www.nextgenmarketers.com', description: 'Future-proof your marketing skills with our cutting-edge courses.' },
-          { id: 7, title: 'Marketing Wizardry', url: 'https://www.marketingwizardry.com', description: 'Cast a spell on your audience with magical marketing techniques.' },
-          { id: 8, title: 'SEO Mastery Hub', url: 'https://www.seomasteryhub.com', description: 'Become an SEO master with our comprehensive training programs.' },
-          { id: 9, title: 'Social Media Gurus', url: 'https://www.socialmediagurus.com', description: 'Learn the secrets of social media marketing from industry gurus.' },
-          { id: 10, title: 'Influencer Marketing Insights', url: 'https://www.influencermarketinginsights.com', description: 'Dive into the world of influencer marketing and elevate your strategy.' },
-          { id: 11, title: 'Digital Ads Academy', url: 'https://www.digitaladsacademy.com', description: 'Expert training in crafting successful digital advertising campaigns.' },
-          { id: 12, title: 'Content Marketing Corner', url: 'https://www.contentmarketingcorner.com', description: 'Learn how to create content that captivates and converts.' },
-          { id: 13, title: 'Email Marketing Experts', url: 'https://www.emailmarketingexperts.com', description: 'Master the art of email marketing for maximum engagement.' },
-          { id: 14, title: 'Analytics for Marketers', url: 'https://www.analyticsformarketers.com', description: 'Use analytics to drive your digital marketing decisions and strategies.' }
-      ]
-  }
-];
+let { data: Queries, error } = await sp
+  .from('Query')
+  .select('*')
 
 let currentSession;
 
