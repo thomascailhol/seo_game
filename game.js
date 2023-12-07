@@ -1,5 +1,7 @@
 let sp;
 let queries;
+const gameOverGif = 'https://media.giphy.com/media/eJ4j2VnYOZU8qJU3Py/giphy.gif';
+const winGif = 'https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif';
 
 document.addEventListener('DOMContentLoaded', (event) => {
   sp =
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 class GameSession {
   constructor(query, queryIndex, playerName) {
     this.query = query;
+    this.numberOfResults = query.ranking.results.length;
     this.score = 0;
     this.position = 15;
     this.usedCards = [];
@@ -45,8 +48,10 @@ class GameSession {
 
     if (this.position === 1) {
       this.endGame('won');
-    } else if (this.position === 15 || this.usedCards.length >= 6) {
-      this.endGame('lost');
+    } else if (this.position <= this.numberOfResults) {
+      this.endGame('game_over');
+    } else if (this.usedCards.length >= 6) {
+      this.endGame('game_over');
     }
   }
 
@@ -58,8 +63,10 @@ class GameSession {
     console.log('Your score is ' + this.score)
     if (outcome === 'won') {
       console.log('You won!');
-    } else {
+      alert('You won! Your score is ' + this.score);
+    } else if (outcome === 'game_over') {
       console.log('You lost!');
+      alert('You lost! Your score is ' + this.score);
     }
 
     submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.score, this.query.name, this.score);
