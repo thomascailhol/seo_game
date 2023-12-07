@@ -227,14 +227,15 @@ function updateRankingDisplay() {
   googleResultsDiv.innerHTML = '';
   updateUsedCardsCount();
 
-  const results = [...queries[currentSession.queryIndex].ranking.results]; // Clone the ranking array
-  const userSite = {
-    id: 15, // Assign a unique ID for the user's site
-    title: 'Your Site', // Custom title for the user's site
-    url: 'https://www.yoursite.com', // Custom URL for the user's site
-    description: 'Your site description.', // Custom description
-    userSite: true // Flag to identify the user's site
-  };
+  const results = [...queries[currentSession.queryIndex].ranking.results];
+  userSite = results.find(result => result.userSite);
+  // const userSite = {
+  //   id: 15, // Assign a unique ID for the user's site
+  //   title: 'Your Site', // Custom title for the user's site
+  //   url: 'https://www.yoursite.com', // Custom URL for the user's site
+  //   description: 'Your site description.', // Custom description
+  //   userSite: true // Flag to identify the user's site
+  // };
 
   // Assuming that the maximum number of moves to win is 6 (as per your game logic)
   const maxMoves = 6;
@@ -246,7 +247,8 @@ function updateRankingDisplay() {
 
   // Determine the user's site position based on cumulative impact
   // The impact is subtracted from a starting point (e.g., 15), and bounds are enforced
-  const userSitePosition = Math.max(1, Math.min(15, 15 - cumulativeImpact));
+  const numberOfResults = results.length;
+  const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
 
   // Insert the user's site at the calculated position
   results.splice(userSitePosition - 1, 0, userSite);
