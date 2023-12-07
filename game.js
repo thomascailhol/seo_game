@@ -48,7 +48,7 @@ class GameSession {
 
     if (this.position === 1) {
       this.endGame('won');
-    } else if (this.position <= this.numberOfResults) {
+    } else if (this.position >= this.numberOfResults) {
       this.endGame('game_over');
     } else if (this.usedCards.length >= 6) {
       this.endGame('game_over');
