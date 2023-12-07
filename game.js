@@ -251,7 +251,7 @@ function updateRankingDisplay() {
   const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
 
   // Insert the user's site at the calculated position
-  results.splice(userSitePosition - 1, 0, userSite);
+  // results.splice(userSitePosition - 1, 0, userSite);
 
   results.forEach((result, index) => {
     const resultDiv = document.createElement('div');
