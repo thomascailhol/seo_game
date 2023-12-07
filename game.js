@@ -229,6 +229,8 @@ function updateRankingDisplay() {
 
   const results = [...queries[currentSession.queryIndex].ranking.results];
   userSite = results.find(result => result.userSite);
+  // remove userSite from results
+  results.splice(results.indexOf(userSite), 1);
   // const userSite = {
   //   id: 15, // Assign a unique ID for the user's site
   //   title: 'Your Site', // Custom title for the user's site
@@ -251,7 +253,7 @@ function updateRankingDisplay() {
   const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
 
   // Insert the user's site at the calculated position
-  // results.splice(userSitePosition - 1, 0, userSite);
+  results.splice(userSitePosition - 1, 0, userSite);
 
   results.forEach((result, index) => {
     const resultDiv = document.createElement('div');
