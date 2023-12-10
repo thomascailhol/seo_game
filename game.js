@@ -33,7 +33,7 @@ class GameSession {
     this.query = query;
     this.numberOfResults = query.ranking.results.length;
     this.score = 0;
-    this.position = 15;
+    this.position = query.ranking.results.length + 5;
     this.usedCards = [];
     this.gameOver = false;
     this.playerName = playerName;
@@ -113,7 +113,7 @@ class GameSession {
 
   computeFinalScore() {
     if (this.position === 1) {
-      this.score = 15;
+      this.score = queries[this.queryIndex].ranking.results.length;
     } else if (this.position === queries[this.queryIndex].ranking.results.length) {
       this.score = 0;
     } else if (this.usedCards.some(card => card.impact === -666)) {
