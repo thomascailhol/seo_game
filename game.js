@@ -33,7 +33,7 @@ class GameSession {
     this.query = query;
     this.numberOfResults = query.ranking.results.length;
     this.score = 0;
-    this.position = query.ranking.results.length + 5;
+    this.position = query.ranking.results.length - 5;
     this.usedCards = [];
     this.gameOver = false;
     this.playerName = playerName;
@@ -76,7 +76,7 @@ class GameSession {
   chooseCard(index) {
     const card = this.query.cards[index];
     this.usedCards.push(card);
-    console.log('Used cards:', this.usedCards);
+    console.log('Used cards:', this.usedCards.length);
     console.log('Position:', this.position);
     if (card.impact === -666) {
       this.endGame('game_over');
@@ -299,7 +299,7 @@ function updateRankingDisplay() {
   // The impact is subtracted from a starting point (e.g., 15), and bounds are enforced
   const numberOfResults = results.length;
   // const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
-  const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact + 1));
+  const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
 
   // Insert the user's site at the calculated position
   results.splice(userSitePosition - 1, 0, userSite);
