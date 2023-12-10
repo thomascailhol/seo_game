@@ -76,7 +76,7 @@ class GameSession {
   chooseCard(index) {
     const card = this.query.cards[index];
     this.usedCards.push(card);
-  
+    console.log('Used cards:', this.usedCards);
     if (card.impact === -666) {
       this.endGame('game_over');
     } else {
@@ -114,12 +114,12 @@ class GameSession {
   computeFinalScore() {
     if (this.position === 1) {
       this.score = 15;
-    } else if (this.position === (queries[this.queryIndex].ranking.results.length + 1)) {
+    } else if (this.position === queries[this.queryIndex].ranking.results.length) {
       this.score = 0;
     } else if (this.usedCards.some(card => card.impact === -666)) {
       this.score = 0; // If the user picked a card with an impact of -666, set the score to 0
     } else {
-      this.score = (queries[this.queryIndex].ranking.results.length + 1) - this.position;
+      this.score = queries[this.queryIndex].ranking.results.length - this.position + 1;
     }
   }  
 }
