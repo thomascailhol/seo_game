@@ -59,7 +59,7 @@ class GameSession {
     const card = this.query.cards[index];
     this.usedCards.push(card);
   
-    if (card.impact === 666) {
+    if (card.impact === -666) {
       this.position = this.numberOfResults; // Set position to the last position
       this.endGame('game_over'); // End the game
     } else {
