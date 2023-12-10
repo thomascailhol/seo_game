@@ -77,6 +77,7 @@ class GameSession {
     const card = this.query.cards[index];
     this.usedCards.push(card);
     console.log('Used cards:', this.usedCards);
+    console.log('Position:', this.position);
     if (card.impact === -666) {
       this.endGame('game_over');
     } else {
