@@ -55,23 +55,43 @@ class GameSession {
   //   }
   // }
 
+  // chooseCard(index) {
+  //   const card = this.query.cards[index];
+  //   this.usedCards.push(card);
+  
+  //   if (card.impact === -666) {
+  //     this.position = this.numberOfResults; // Set position to the last position
+  //     this.endGame('game_over'); // End the game
+  //   } else {
+  //     this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
+  
+  //     if (this.position === 1) {
+  //       this.endGame('won');
+  //     } else if (this.usedCards.length >= 6) {
+  //       this.endGame('game_over');
+  //     }
+  //   }
+  // }  
+
   chooseCard(index) {
     const card = this.query.cards[index];
     this.usedCards.push(card);
   
     if (card.impact === -666) {
-      this.position = this.numberOfResults; // Set position to the last position
-      this.endGame('game_over'); // End the game
+      this.endGame('game_over');
     } else {
       this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
   
       if (this.position === 1) {
         this.endGame('won');
-      } else if (this.usedCards.length >= 6) {
+      } else if (this.usedCards.length >= 6 && this.position < 3) {
         this.endGame('game_over');
+      } else if (this.usedCards.length >= 6 && this.position <= 3) {
+        this.endGame('won');
       }
     }
-  }  
+  }
+  
 
   endGame(outcome) {
     this.gameOver = true;
@@ -96,10 +116,12 @@ class GameSession {
       this.score = 15;
     } else if (this.position === (queries[this.queryIndex].ranking.results.length + 1)) {
       this.score = 0;
+    } else if (this.usedCards.some(card => card.impact === -666)) {
+      this.score = 0; // If the user picked a card with an impact of -666, set the score to 0
     } else {
       this.score = (queries[this.queryIndex].ranking.results.length + 1) - this.position;
     }
-  }
+  }  
 }
 
 // Call the function
