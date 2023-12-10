@@ -40,20 +40,38 @@ class GameSession {
     this.queryIndex = queryIndex;
   }
 
+  // chooseCard(index) {
+  //   const card = this.query.cards[index];
+  //   this.usedCards.push(card);
+
+  //   this.position = Math.max(1, Math.min(15, this.position - card.impact)); // minus because the goal is to go first
+
+  //   if (this.position === 1) {
+  //     this.endGame('won');
+  //   } else if (this.position >= this.numberOfResults) {
+  //     this.endGame('game_over');
+  //   } else if (this.usedCards.length >= 6) {
+  //     this.endGame('game_over');
+  //   }
+  // }
+
   chooseCard(index) {
     const card = this.query.cards[index];
     this.usedCards.push(card);
-
-    this.position = Math.max(1, Math.min(15, this.position - card.impact)); // minus because the goal is to go first
-
-    if (this.position === 1) {
-      this.endGame('won');
-    } else if (this.position >= this.numberOfResults) {
-      this.endGame('game_over');
-    } else if (this.usedCards.length >= 6) {
-      this.endGame('game_over');
+  
+    if (card.impact === 666) {
+      this.position = this.numberOfResults; // Set position to the last position
+      this.endGame('game_over'); // End the game
+    } else {
+      this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
+  
+      if (this.position === 1) {
+        this.endGame('won');
+      } else if (this.usedCards.length >= 6) {
+        this.endGame('game_over');
+      }
     }
-  }
+  }  
 
   endGame(outcome) {
     this.gameOver = true;
@@ -257,7 +275,8 @@ function updateRankingDisplay() {
   // Determine the user's site position based on cumulative impact
   // The impact is subtracted from a starting point (e.g., 15), and bounds are enforced
   const numberOfResults = results.length;
-  const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
+  // const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
+  const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact + 1));
 
   // Insert the user's site at the calculated position
   results.splice(userSitePosition - 1, 0, userSite);
