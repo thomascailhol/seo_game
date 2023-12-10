@@ -40,39 +40,6 @@ class GameSession {
     this.queryIndex = queryIndex;
   }
 
-  // chooseCard(index) {
-  //   const card = this.query.cards[index];
-  //   this.usedCards.push(card);
-
-  //   this.position = Math.max(1, Math.min(15, this.position - card.impact)); // minus because the goal is to go first
-
-  //   if (this.position === 1) {
-  //     this.endGame('won');
-  //   } else if (this.position >= this.numberOfResults) {
-  //     this.endGame('game_over');
-  //   } else if (this.usedCards.length >= 6) {
-  //     this.endGame('game_over');
-  //   }
-  // }
-
-  // chooseCard(index) {
-  //   const card = this.query.cards[index];
-  //   this.usedCards.push(card);
-  
-  //   if (card.impact === -666) {
-  //     this.position = this.numberOfResults; // Set position to the last position
-  //     this.endGame('game_over'); // End the game
-  //   } else {
-  //     this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
-  
-  //     if (this.position === 1) {
-  //       this.endGame('won');
-  //     } else if (this.usedCards.length >= 6) {
-  //       this.endGame('game_over');
-  //     }
-  //   }
-  // }  
-
   chooseCard(index) {
     const card = this.query.cards[index];
     this.usedCards.push(card);
@@ -287,19 +254,19 @@ function updateRankingDisplay() {
   //   userSite: true // Flag to identify the user's site
   // };
 
-  // Assuming that the maximum number of moves to win is 6 (as per your game logic)
-  const maxMoves = 6;
+  // // Assuming that the maximum number of moves to win is 6 (as per your game logic)
+  // const maxMoves = 6;
 
-  // Calculate the moves made so far
-  const movesMade = currentSession.usedCards.length;
+  // // Calculate the moves made so far
+  // const movesMade = currentSession.usedCards.length;
 
-  const cumulativeImpact = currentSession.usedCards.reduce((total, card) => total + card.impact, 0);
+  // const cumulativeImpact = currentSession.usedCards.reduce((total, card) => total + card.impact, 0);
 
-  // Determine the user's site position based on cumulative impact
-  // The impact is subtracted from a starting point (e.g., 15), and bounds are enforced
-  const numberOfResults = results.length;
+  // // Determine the user's site position based on cumulative impact
+  // // The impact is subtracted from a starting point (e.g., 15), and bounds are enforced
+  // const numberOfResults = results.length;
   // const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
-  const userSitePosition = Math.max(1, Math.min(numberOfResults, numberOfResults - cumulativeImpact));
+  const userSitePosition = currentSession.position;
 
   // Insert the user's site at the calculated position
   results.splice(userSitePosition - 1, 0, userSite);
