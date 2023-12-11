@@ -408,7 +408,7 @@ function displayCards(cards) {
     gameCardInner.innerHTML = ``
     gameCardInner.appendChild(gameCardTitleWrapper); // Add gameCardTitleWrapper to gameCardInner
     gameCardInner.appendChild(gameCardDescriptionWrapper); // Add gameCardDescriptionWrapper to gameCardInner
-    gameCardInner.appendChild(impactWrapper); // Add impactWrapper to gameCardInner
+    gameCard.appendChild(impactWrapper); // Add impactWrapper to gameCardInner
 
     gameCard.addEventListener('click', cardClickHandler);
 
