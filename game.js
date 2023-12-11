@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 class GameSession {
-  constructor(query, queryIndex, playerName) {
+  constructor(query, queryIndex, playerName, context) {
     this.query = query;
     this.numberOfResults = query.ranking.results.length;
     this.score = 0;
@@ -38,6 +38,7 @@ class GameSession {
     this.gameOver = false;
     this.playerName = playerName;
     this.queryIndex = queryIndex;
+    this.context = context;
   }
 
   chooseCard(index) {
@@ -99,7 +100,9 @@ class GameSession {
 
 
   computeFinalScore() {
-    if (this.position === 1) {
+    if (this.position === 1 && this.usedCards.length < 6) {
+      this.score = queries[this.queryIndex].ranking.results.length * (6 - this.usedCards.length);
+    } else if (this.position === 1) {
       this.score = queries[this.queryIndex].ranking.results.length;
     } else if (this.position === queries[this.queryIndex].ranking.results.length) {
       this.score = 0;
@@ -188,7 +191,7 @@ function toggleRules() {
 function startNewSession(queryIndex, playerName) {
   const selectedQuery = queries[queryIndex];
   console.log('Starting new session with query:', selectedQuery);
-  currentSession = new GameSession(selectedQuery, queryIndex, playerName);
+  currentSession = new GameSession(selectedQuery, queryIndex, playerName, selectedQuery.context);
 
   hideRules();
   hideQueries();
