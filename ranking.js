@@ -29,7 +29,7 @@ function displayRankings(rankings) {
         const position = index + 1; // Position in the ranking
         const listItem = document.createElement('li');
         listItem.className = 'list-item';
-        listItem.textContent = `${position}. ${ranking.name}, Score: ${ranking.total_score}`;
+        listItem.textContent = `${position}. ${ranking.name}, Score : ${ranking.total_score} (${ranking.total_games} parties)`;
         // Customize the textContent as needed
 
         rankingList.appendChild(listItem);
