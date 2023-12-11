@@ -2,22 +2,28 @@ let sp;
 let queries;
 const gameOverGif = 'https://giphy.com/embed/eJ4j2VnYOZU8qJU3Py';
 const winGif = 'https://giphy.com/embed/26tOZ42Mg6pbTUPHW';
+const supabaseUrl = 'https://fyzgsmdxumjqcmqkdizz.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2dzbWR4dW1qcWNtcWtkaXp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEzMzU3NTYsImV4cCI6MjAxNjkxMTc1Nn0.c_-UlBxlaFZZcj9FKr8u33r2TE7KZSt_-MzijCPlB94';
 
 document.addEventListener('DOMContentLoaded', (event) => {
+  initializeSupabase();
+  setUpEventListeners();
+  collectQueries();
+});
+
+function initializeSupabase() {
   sp =
-    supabase.createClient('https://fyggsmdxumjqcmqkdizz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2dzbWR4dW1qcWNtcWtkaXp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEzMzU3NTYsImV4cCI6MjAxNjkxMTc1Nn0.c_-UlBxlaFZZcj9FKr8u33r2TE7KZSt_-MzijCPlB94');
-  console.log(sp);
+    supabase.createClient(supabaseUrl, supabaseKey);
+}
+
+function setUpEventListeners() {
   const startGameButton = document.getElementById('start-game');
-  const rulesButton = document.getElementById('rules-button');
-  // add event listenier to start game button
   startGameButton.addEventListener('click', function () {
-    console.log('display queries');
     toggleMenu();
     togglePlayerInput();
   });
-  // add event listener to rules button
+  const rulesButton = document.getElementById('rules-button');
   rulesButton.addEventListener('click', function () {
-    console.log('display rules');
     toggleRules();
   });
   const form = document.getElementById('new-player-form'); // Replace with your form's ID
@@ -29,8 +35,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   rulesWrapper.addEventListener('click', function () {
     toggleRules();
   });
-  collectQueries();
-});
+}
 
 class GameSession {
   constructor(query, queryIndex, playerName, context) {
@@ -89,7 +94,7 @@ class GameSession {
     } else if (outcome === 'top_10') {
       this.displayEndGame('won', 'Pas mal ! Vous a avez terminé le SEO Game dans le top 10 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
     } else if (outcome === 'game_over') {
-      this.displayEndGame('lost', 'Ouch ! Vous avez terminé au fin fond des SERPs ' + this.playerName + ' à la position ' + this.position + ' ! C\'est la cata... Foncez voir un membre de l\'équipe Hyffen pour vous remonter le moral et vous donner quelques conseils. (Vous obtenez bien évidemment ' + this.score + ' points !)');
+      this.displayEndGame('lost', 'Ouch ! Vous avez terminé au fin fond des SERPs ' + this.playerName + ' à la position ' + this.position + ' ! C\'est la cata... Foncez voir un membre de l\'équipe Hyffen pour vous remonter le moral et vous donner quelques conseils. (Vous obtenez bien évidemment ' + this.score + ' point !)');
     } else if (outcome === 'lost') {
       this.displayEndGame('lost', 'Vous pouvez mieux faire ! Vous avez terminé le SEO Game à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
     }
