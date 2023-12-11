@@ -202,11 +202,17 @@ function startNewSession(queryIndex, playerName) {
 
   hideRules();
   hideQueries();
+  displayContext(selectedQuery.context);
   displayCards(queries[currentSession.queryIndex].cards);
   // displayQuery(selectedQuery['name']);
   currentSession.score = 0;
   // updateScoreDisplay();
   updateRankingDisplay();
+}
+
+function displayContext(context) {
+  const contextDisplay = document.getElementById('context');
+  contextDisplay.textContent = context;
 }
 
 function updateUsedCardsCount() {
