@@ -192,7 +192,7 @@ function submitPlayerName() {
 function toggleRules() {
   const menu = document.getElementById('menu');
   menu.classList.toggle('hidden');
-  const rules = document.getElementById('rules');
+  const rules = document.getElementById('rules-wrapper');
   rules.classList.toggle('hidden');
 }
 
