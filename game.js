@@ -226,13 +226,18 @@ function updateUsedCardsCount() {
 function onCardChoice(index, cardElement) {
   const impact = currentSession.query.cards[index].impact;
   currentSession.chooseCard(index);
-
-  cardElement.classList.add('used');
+  cardElement.getElementById('game-card-inner').classList.add('used');
 
   const impactWrapper = cardElement.querySelector('.impact-wrapper');
   // add a paragraph inside impact wrapper sith class impact-score
   const impactScore = document.createElement('p');
   impactScore.classList.add('impact-score');
+  // add a class to the impact score depending on the impact if negative add text-pink and if positive add text-blue
+  if (impact <= 0) {
+    impactScore.classList.add('text-pink');
+  } else {
+    impactScore.classList.add('text-blue');
+  }
   impactScore.textContent = impact;
   impactWrapper.appendChild(impactScore);
 
