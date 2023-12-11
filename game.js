@@ -46,6 +46,7 @@ class GameSession {
     console.log('Used cards:', this.usedCards.length);
     console.log('Position:', this.position);
     if (card.impact === -666) {
+      this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
       this.endGame('game_over');
     } else {
       this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
@@ -73,15 +74,21 @@ class GameSession {
 
     console.log('Your score is ' + this.score)
 
-    if (outcome === 'first_place') {
+    if (outcome === 'nailed_it') {
       console.log('You won!');
-      alert('Bravo ! Vous a avez terminé le SEO Game en première position en utilisant seulement cartes! Vous obtenez ' + this.score + ' points !');
+      alert('Incroyable ! Vous avez terminé le SEO Game en première position en utilisant seulement ' + this.usedCards.length + ' cartes! Vous obtenez ' + this.score + ' points !');
+    } else if (outcome === 'first_place') {
+      console.log('You won!');
+      alert('Bravo ! Vous terminé le SEO Game en première position ! Vous obtenez ' + this.score + ' points !');
     } else if (outcome === 'top_3') {
       console.log('You won!');
       alert('Bravo ! Vous a avez terminé le SEO Game dans le top 3 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
     } else if (outcome === 'top_10') {
       console.log('You won!');
       alert('Pas mal ! Vous a avez terminé le SEO Game dans le top 10 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
+    } else if (outcome === 'game_over') {
+      console.log('You lost!');
+      alert('Ouch ! Vous avez terminé au fin fond des SERPs ' + this.playerName + ' à la position ' + this.position + ' ! C\'est la cata... Foncez voir un membre de l\'équipe Hyffen pour vous remonter le moral et vous donner quelques conseils. (Vous obtenez bien évidemment ' + this.score + ' points !)');
     } else {
       console.log('You lost!');
       alert('Vous pouvez mieux faire ! Vous avez terminé le SEO Game à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
