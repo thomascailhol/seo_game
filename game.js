@@ -76,28 +76,16 @@ class GameSession {
     console.log('Your score is ' + this.score)
 
     if (outcome === 'nailed_it') {
-      console.log('You won!');
-      alert('Incroyable ! Vous avez terminé le SEO Game en première position en utilisant seulement ' + this.usedCards.length + ' cartes! Vous obtenez ' + this.score + ' points !');
       this.displayEndGame('won', 'Incroyable ! Vous avez terminé le SEO Game en première position en utilisant seulement ' + this.usedCards.length + ' cartes! Vous obtenez ' + this.score + ' points !');
     } else if (outcome === 'first_place') {
-      console.log('You won!');
-      alert('Bravo ! Vous terminé le SEO Game en première position ! Vous obtenez ' + this.score + ' points !');
       this.displayEndGame('won', 'Bravo ! Vous terminé le SEO Game en première position ! Vous obtenez ' + this.score + ' points !');
     } else if (outcome === 'top_3') {
-      console.log('You won!');
-      alert('Bravo ! Vous a avez terminé le SEO Game dans le top 3 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
       this.displayEndGame('won', 'Bravo ! Vous a avez terminé le SEO Game dans le top 3 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
     } else if (outcome === 'top_10') {
-      console.log('You won!');
-      alert('Pas mal ! Vous a avez terminé le SEO Game dans le top 10 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
       this.displayEndGame('won', 'Pas mal ! Vous a avez terminé le SEO Game dans le top 10 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
     } else if (outcome === 'game_over') {
-      console.log('You lost!');
-      alert('Ouch ! Vous avez terminé au fin fond des SERPs ' + this.playerName + ' à la position ' + this.position + ' ! C\'est la cata... Foncez voir un membre de l\'équipe Hyffen pour vous remonter le moral et vous donner quelques conseils. (Vous obtenez bien évidemment ' + this.score + ' points !)');
       this.displayEndGame('lost', 'Ouch ! Vous avez terminé au fin fond des SERPs ' + this.playerName + ' à la position ' + this.position + ' ! C\'est la cata... Foncez voir un membre de l\'équipe Hyffen pour vous remonter le moral et vous donner quelques conseils. (Vous obtenez bien évidemment ' + this.score + ' points !)');
     } else if (outcome === 'lost') {
-      console.log('You lost!');
-      alert('Vous pouvez mieux faire ! Vous avez terminé le SEO Game à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
       this.displayEndGame('lost', 'Vous pouvez mieux faire ! Vous avez terminé le SEO Game à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
     }
 
