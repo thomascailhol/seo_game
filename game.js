@@ -2,28 +2,22 @@ let sp;
 let queries;
 const gameOverGif = 'https://giphy.com/embed/eJ4j2VnYOZU8qJU3Py';
 const winGif = 'https://giphy.com/embed/26tOZ42Mg6pbTUPHW';
-const supabaseUrl = 'https://fyzgsmdxumjqcmqkdizz.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2dzbWR4dW1qcWNtcWtkaXp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEzMzU3NTYsImV4cCI6MjAxNjkxMTc1Nn0.c_-UlBxlaFZZcj9FKr8u33r2TE7KZSt_-MzijCPlB94';
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  initializeSupabase();
-  setUpEventListeners();
-  collectQueries();
-});
-
-function initializeSupabase() {
   sp =
-    supabase.createClient(supabaseUrl, supabaseKey);
-}
-
-function setUpEventListeners() {
+    supabase.createClient('https://fyggsmdxumjqcmqkdizz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2dzbWR4dW1qcWNtcWtkaXp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEzMzU3NTYsImV4cCI6MjAxNjkxMTc1Nn0.c_-UlBxlaFZZcj9FKr8u33r2TE7KZSt_-MzijCPlB94');
+  console.log(sp);
   const startGameButton = document.getElementById('start-game');
+  const rulesButton = document.getElementById('rules-button');
+  // add event listenier to start game button
   startGameButton.addEventListener('click', function () {
+    console.log('display queries');
     toggleMenu();
     togglePlayerInput();
   });
-  const rulesButton = document.getElementById('rules-button');
+  // add event listener to rules button
   rulesButton.addEventListener('click', function () {
+    console.log('display rules');
     toggleRules();
   });
   const form = document.getElementById('new-player-form'); // Replace with your form's ID
@@ -35,7 +29,8 @@ function setUpEventListeners() {
   rulesWrapper.addEventListener('click', function () {
     toggleRules();
   });
-}
+  collectQueries();
+});
 
 class GameSession {
   constructor(query, queryIndex, playerName, context) {
