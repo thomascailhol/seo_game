@@ -1,7 +1,7 @@
 let sp;
 let queries;
-const gameOverGif = 'https://media.giphy.com/media/eJ4j2VnYOZU8qJU3Py/giphy.gif';
-const winGif = 'https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif';
+const gameOverGif = 'https://giphy.com/embed/eJ4j2VnYOZU8qJU3Py';
+const winGif = 'https://giphy.com/embed/26tOZ42Mg6pbTUPHW';
 
 document.addEventListener('DOMContentLoaded', (event) => {
   sp =
