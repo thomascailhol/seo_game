@@ -57,7 +57,7 @@ class GameSession {
       } else if (this.position === 1 && this.usedCards.length === 6) { 
         this.endGame('first_place');
       } else if (this.usedCards.length === 6 && this.position > 10) {
-        this.endGame('game_over');
+        this.endGame('lost');
       } else if (this.usedCards.length === 6 && this.position <= 3) {
         this.endGame('top_3');
       } else if (this.usedCards.length === 6 && this.position > 3) {
@@ -89,7 +89,7 @@ class GameSession {
     } else if (outcome === 'game_over') {
       console.log('You lost!');
       alert('Ouch ! Vous avez terminé au fin fond des SERPs ' + this.playerName + ' à la position ' + this.position + ' ! C\'est la cata... Foncez voir un membre de l\'équipe Hyffen pour vous remonter le moral et vous donner quelques conseils. (Vous obtenez bien évidemment ' + this.score + ' points !)');
-    } else {
+    } else if (outcome === 'lost') {
       console.log('You lost!');
       alert('Vous pouvez mieux faire ! Vous avez terminé le SEO Game à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
     }
