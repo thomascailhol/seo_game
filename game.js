@@ -205,7 +205,6 @@ function startNewSession(queryIndex, playerName) {
   console.log('Starting new session with query:', selectedQuery);
   currentSession = new GameSession(selectedQuery, queryIndex, playerName, selectedQuery.context);
 
-  hideRules();
   hideQueries();
   displayCards(queries[currentSession.queryIndex].cards);
   displayContext(selectedQuery.context);
