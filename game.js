@@ -212,7 +212,8 @@ function startNewSession(queryIndex, playerName) {
 
 function displayContext(context) {
   const container = document.getElementById('game-cards-container');
-  const contextContainer = document.createElement('p');
+  const contextContainer = document.createElement('div');
+  contextContainer.classList.add('context');
   contextContainer.textContent = context;
   container.insertAdjacentElement('afterbegin', contextContainer);
 }
