@@ -5,7 +5,8 @@ console.log(sp)
 
 document.addEventListener('DOMContentLoaded', function() {
     fetchAndDisplayRankings();
-    subscribeToRankingUpdates(); // Set up real-time subscription
+    // subscribeToRankingUpdates(); // Set up real-time subscription
+    setInterval(fetchAndDisplayRankings, 5000);
 });
 
 async function fetchAndDisplayRankings() {
