@@ -214,7 +214,7 @@ function displayContext(context) {
   const container = document.getElementById('game-cards-container');
   const contextContainer = document.createElement('p');
   contextContainer.textContent = context;
-  container.insertAdjacentElement('afterbegin', context);
+  container.insertAdjacentElement('afterbegin', contextContainer);
 }
 
 function updateUsedCardsCount() {
