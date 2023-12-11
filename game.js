@@ -52,11 +52,15 @@ class GameSession {
       console.log('Position:', this.position);
   
       if (this.position === 1 && this.usedCards.length <= 6) {
-        this.endGame('won');
-      } else if (this.usedCards.length === 6 && this.position > 3) {
+        this.endGame('nailed_it');
+      } else if (this.position === 1 && this.usedCards.length === 6) { 
+        this.endGame('first_place');
+      } else if (this.usedCards.length === 6 && this.position > 10) {
         this.endGame('game_over');
       } else if (this.usedCards.length === 6 && this.position <= 3) {
-        this.endGame('won');
+        this.endGame('top_3');
+      } else if (this.usedCards.length === 6 && this.position > 3) {
+        this.endGame('top_10');
       }
     }
   }
@@ -68,12 +72,19 @@ class GameSession {
     this.computeFinalScore();
 
     console.log('Your score is ' + this.score)
-    if (outcome === 'won') {
+
+    if (outcome === 'first_place') {
       console.log('You won!');
-      alert('You won! Your score is ' + this.score);
-    } else if (outcome === 'game_over') {
+      alert('Bravo ! Vous a avez terminé le SEO Game en première position en utilisant seulement cartes! Vous obtenez ' + this.score + ' points !');
+    } else if (outcome === 'top_3') {
+      console.log('You won!');
+      alert('Bravo ! Vous a avez terminé le SEO Game dans le top 3 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
+    } else if (outcome === 'top_10') {
+      console.log('You won!');
+      alert('Pas mal ! Vous a avez terminé le SEO Game dans le top 10 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
+    } else {
       console.log('You lost!');
-      alert('You lost! Your score is ' + this.score);
+      alert('Vous pouvez mieux faire ! Vous avez terminé le SEO Game à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
     }
 
     submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.score, this.query.name, this.score);
@@ -88,7 +99,7 @@ class GameSession {
     } else if (this.usedCards.some(card => card.impact === -666)) {
       this.score = 0; // If the user picked a card with an impact of -666, set the score to 0
     } else {
-      this.score = queries[this.queryIndex].ranking.results.length - this.position + 1;
+      this.score = queries[this.queryIndex].ranking.results.length - this.position;
     }
   }  
 }
