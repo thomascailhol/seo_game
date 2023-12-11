@@ -76,7 +76,7 @@ class GameSession {
     console.log('Your score is ' + this.score)
 
     if (outcome === 'nailed_it') {
-      this.displayEndGame('won', 'Incroyable ! Vous avez terminé le SEO Game en première position en utilisant seulement ' + this.usedCards.length + ' cartes! Vous obtenez ' + this.score + ' points !');
+      this.displayEndGame('won', `Incroyable ! Vous avez terminé le SEO Game en première position en utilisant seulement ${this.usedCards.length} ${this.usedCards.length === 1 ? 'carte' : 'cartes'} ! Vous obtenez ${this.score} points !`);
     } else if (outcome === 'first_place') {
       this.displayEndGame('won', 'Bravo ! Vous terminé le SEO Game en première position ! Vous obtenez ' + this.score + ' points !');
     } else if (outcome === 'top_3') {
