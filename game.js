@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     event.preventDefault();
     submitPlayerName();
   });
+  const rulesWrapper = document.getElementById('rules-wrapper');
+  rulesWrapper.addEventListener('click', function () {
+    toggleRules();
+  });
   collectQueries();
 });
 
