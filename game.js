@@ -212,9 +212,9 @@ function startNewSession(queryIndex, playerName) {
 
 function displayContext(context) {
   const container = document.getElementById('game-cards-container');
-  const context = container.createElement('p');
+  const contextContainer = document.createElement('p');
+  contextContainer.textContent = context;
   container.insertAdjacentElement('afterbegin', context);
-  context.textContent = context;
 }
 
 function updateUsedCardsCount() {
