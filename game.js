@@ -112,6 +112,19 @@ class GameSession {
       this.score = queries[this.queryIndex].ranking.results.length - this.position;
     }
   }  
+
+  displayEndGame(outcome, message) {
+    const endGame = document.getElementById('end-game');
+    endGame.classList.remove('hidden');
+    const endGameMessage = document.getElementById('end-game-message');
+    endGameMessage.textContent = message;
+    const endGameGif = document.getElementById('end-game-gif');
+    if (outcome === 'won') {
+      endGameGif.src = winGif;
+    } else if (outcome === 'lost') {
+      endGameGif.src = gameOverGif;
+    }
+  }
 }
 
 // Call the function
