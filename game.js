@@ -202,8 +202,8 @@ function startNewSession(queryIndex, playerName) {
 
   hideRules();
   hideQueries();
-  displayContext(selectedQuery.context);
   displayCards(queries[currentSession.queryIndex].cards);
+  displayContext(selectedQuery.context);
   // displayQuery(selectedQuery['name']);
   currentSession.score = 0;
   // updateScoreDisplay();
@@ -211,8 +211,9 @@ function startNewSession(queryIndex, playerName) {
 }
 
 function displayContext(context) {
-  const contextDisplay = document.getElementById('context');
-  contextDisplay.textContent = context;
+  const container = document.getElementById('game-cards-container');
+  const context = container.createElement('p');
+  context.textContent = context;
 }
 
 function updateUsedCardsCount() {
