@@ -226,7 +226,8 @@ function updateUsedCardsCount() {
 function onCardChoice(index, cardElement) {
   const impact = currentSession.query.cards[index].impact;
   currentSession.chooseCard(index);
-  cardElement.getElementById('game-card-inner').classList.add('used');
+  // find card element child with id game-card-inner and add class used
+  cardElement.querySelector('.game-card-inner').classList.add('used');
 
   const impactWrapper = cardElement.querySelector('.impact-wrapper');
   // add a paragraph inside impact wrapper sith class impact-score
