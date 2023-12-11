@@ -33,7 +33,8 @@ class GameSession {
     this.query = query;
     this.numberOfResults = query.ranking.results.length;
     this.score = 0;
-    this.position = query.ranking.results.length - 5;
+    // this.position = query.ranking.results.length - 5;
+    this.position = 21;
     this.usedCards = [];
     this.gameOver = false;
     this.playerName = playerName;
