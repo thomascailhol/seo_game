@@ -81,17 +81,17 @@ class GameSession {
     console.log('Your score is ' + this.score)
 
     if (outcome === 'nailed_it') {
-      this.displayEndGame('won', `Incroyable ! Vous avez terminé le SEO Game en première position en utilisant seulement ${this.usedCards.length} ${this.usedCards.length === 1 ? 'carte' : 'cartes'} ! Vous obtenez ${this.score} points !`);
+      this.displayEndGame('won', `Incroyable ! Tu as terminé le SEO Game en première position en utilisant seulement ${this.usedCards.length} ${this.usedCards.length === 1 ? 'carte' : 'cartes'} ! Tu obtiens ${this.score} points !`);
     } else if (outcome === 'first_place') {
-      this.displayEndGame('won', 'Bravo ! Vous terminé le SEO Game en première position ! Vous obtenez ' + this.score + ' points !');
+      this.displayEndGame('won', 'Bravo ! Tu as terminé le SEO Game en première position ! Tu obtiens ' + this.score + ' points !');
     } else if (outcome === 'top_3') {
-      this.displayEndGame('won', 'Bravo ! Vous avez terminé le SEO Game dans le top 3 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
+      this.displayEndGame('won', 'Bravo ! Tu as terminé le SEO Game dans le top 3 à la position ' + this.position + ' ! Tu obtiens ' + this.score + ' points !');
     } else if (outcome === 'top_10') {
-      this.displayEndGame('won', 'Pas mal ! Vous avez terminé le SEO Game dans le top 10 à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
+      this.displayEndGame('won', 'Pas mal ! Tu as terminé le SEO Game dans le top 10 à la position ' + this.position + ' ! Tu obtiens ' + this.score + ' points !');
     } else if (outcome === 'game_over') {
-      this.displayEndGame('lost', 'Ouch ! Vous avez terminé au fin fond des SERPs ' + this.playerName + ' à la position ' + this.position + ' ! C\'est la cata... Foncez voir un membre de l\'équipe Hyffen pour vous remonter le moral et vous donner quelques conseils. (Vous obtenez bien évidemment ' + this.score + ' point !)');
+      this.displayEndGame('lost', 'Ouch ! Tu as terminé au fin fond des SERPs ' + this.playerName + ' à la position ' + this.position + ' ! C\'est la cata... Fonce voir un membre de l\'équipe hyffen pour te remonter le moral et te donner quelques conseils. (Tu obtiens bien évidemment ' + this.score + ' point !)');
     } else if (outcome === 'lost') {
-      this.displayEndGame('lost', 'Vous pouvez mieux faire ! Vous avez terminé le SEO Game à la position ' + this.position + ' ! Vous obtenez ' + this.score + ' points !');
+      this.displayEndGame('lost', 'Tu peux mieux faire ! Tu as terminé le SEO Game à la position ' + this.position + ' ! Tu obtiens ' + this.score + ' points !');
     }
 
     submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.score, this.query.name, this.score);
