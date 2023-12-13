@@ -58,7 +58,7 @@ class GameSession {
       this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
       console.log('Position:', this.position);
   
-      if (this.position === 1 && this.usedCards.length <= 6) {
+      if (this.position === 1 && this.usedCards.length < 6) {
         this.endGame('nailed_it');
       } else if (this.position === 1 && this.usedCards.length === 6) { 
         this.endGame('first_place');
