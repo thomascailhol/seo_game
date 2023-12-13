@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     toggleRules();
   });
   collectQueries();
+  collectPlayers();
 });
 
 class GameSession {
@@ -152,6 +153,32 @@ async function collectQueries() {
   }
 }
 
+async function fetchPlayers() {
+  try {
+    const { data, error } = await sp.rpc('get_players');
+
+    if (error) throw error;
+
+    console.log('Players retrieved from Supabase:', data);
+    // find playerName column value from games
+    return data;
+  } catch (err) {
+    console.error('Error retrieving players from Supabase:', err);
+    throw err; // Re-throw the error to be handled elsewhere if needed
+  }
+}
+
+async function collectPlayers() {
+  try {
+    players = await fetchPlayers();
+    insertPlayersNames(players);
+    console.log('Players:', players);
+  } catch (error) {
+    // Handle errors here if needed
+    console.error('Error collecting players:', error);
+  }
+}
+
 let currentSession;
 
 function displayQueries(playerName) {
@@ -172,6 +199,22 @@ function displayQueries(playerName) {
   });
 }
 
+function insertPlayersNames(players) {
+  const playersNames = document.getElementById('players-names');
+  playersNames.innerHTML = '';
+  players.forEach(player => {
+    const playerName = document.createElement('p');
+    playerName.classList.add('player-name');
+    playerName.textContent = player.name;
+    playersNames.appendChild(playerName);
+    // Add an event listtner to set the player name value of the session to the text content of the playerName paragraph
+    playerName.addEventListener('click', function () {
+      // call submitPlayerName with the name of the clicked player
+      submitPlayerName(player.name);
+    });
+  });
+}
+
 function toggleMenu() {
   const menu = document.getElementById('menu');
   menu.classList.toggle('hidden');
@@ -184,13 +227,18 @@ function togglePlayerInput() {
   playerInput.classList.toggle('hidden');
 }
 
-function submitPlayerName() {
-  const playerNameInput = document.getElementById('player-name');
-  const playerName = playerNameInput.value;
-  console.log('Player name:', playerName);
-  displayQueries(playerName);
-  togglePlayerInput();
-  // toggleMenu();
+function submitPlayerName(playerName) {
+  if (playerName) {
+    console.log('Player name:', playerName);
+    displayQueries(playerName);
+    togglePlayerInput();
+  } else {
+    const playerNameInput = document.getElementById('player-name');
+    const playerName = playerNameInput.value;
+    console.log('Player name:', playerName);
+    displayQueries(playerName);
+    togglePlayerInput();
+  }
 }
 
 function toggleRules() {
