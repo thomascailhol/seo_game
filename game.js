@@ -6,18 +6,15 @@ const winGif = 'https://giphy.com/embed/26tOZ42Mg6pbTUPHW';
 document.addEventListener('DOMContentLoaded', (event) => {
   sp =
     supabase.createClient('https://fyggsmdxumjqcmqkdizz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2dzbWR4dW1qcWNtcWtkaXp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEzMzU3NTYsImV4cCI6MjAxNjkxMTc1Nn0.c_-UlBxlaFZZcj9FKr8u33r2TE7KZSt_-MzijCPlB94');
-  console.log(sp);
   const startGameButton = document.getElementById('start-game');
   const rulesButton = document.getElementById('rules-button');
   // add event listenier to start game button
   startGameButton.addEventListener('click', function () {
-    console.log('display queries');
     toggleMenu();
     togglePlayerInput();
   });
   // add event listener to rules button
   rulesButton.addEventListener('click', function () {
-    console.log('display rules');
     toggleRules();
   });
   const form = document.getElementById('new-player-form'); // Replace with your form's ID
@@ -50,8 +47,6 @@ class GameSession {
   chooseCard(index) {
     const card = this.query.cards[index];
     this.usedCards.push(card);
-    console.log('Used cards:', this.usedCards.length);
-    console.log('Position:', this.position);
     if (card.impact === -666) {
       this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
       this.endGame('game_over');
@@ -78,8 +73,6 @@ class GameSession {
     this.gameOver = true;
     disableAllCards();
     this.computeFinalScore();
-
-    console.log('Your score is ' + this.score)
 
     if (outcome === 'nailed_it') {
       this.displayEndGame('won', `Incroyable ! Tu as terminé le SEO Game en première position en utilisant seulement ${this.usedCards.length} ${this.usedCards.length === 1 ? 'carte' : 'cartes'} ! Tu obtiens ${this.score} points !`);
@@ -134,7 +127,6 @@ async function fetchQueries() {
 
   try {
     const result = await queryTable.select('*');
-    console.log('Queries retrieved from Supabase:', result);
     return result.data; // Return the data
   } catch (error) {
     console.error('Error retrieving queries from Supabase:', error);
@@ -146,7 +138,6 @@ async function fetchQueries() {
 async function collectQueries() {
   try {
     queries = await fetchQueries();
-    console.log('Queries:', queries);
   } catch (error) {
     // Handle errors here if needed
     console.error('Error collecting queries:', error);
@@ -159,7 +150,6 @@ async function fetchPlayers() {
 
     if (error) throw error;
 
-    console.log('Players retrieved from Supabase:', data);
     // find playerName column value from games
     return data;
   } catch (err) {
@@ -172,7 +162,6 @@ async function collectPlayers() {
   try {
     players = await fetchPlayers();
     insertPlayersNames(players);
-    console.log('Players:', players);
   } catch (error) {
     // Handle errors here if needed
     console.error('Error collecting players:', error);
@@ -229,13 +218,11 @@ function togglePlayerInput() {
 
 function submitPlayerName(playerName) {
   if (playerName) {
-    console.log('Player name:', playerName);
     displayQueries(playerName);
     togglePlayerInput();
   } else {
     const playerNameInput = document.getElementById('player-name');
     const playerName = playerNameInput.value;
-    console.log('Player name:', playerName);
     displayQueries(playerName);
     togglePlayerInput();
   }
@@ -250,7 +237,6 @@ function toggleRules() {
 
 function startNewSession(queryIndex, playerName) {
   const selectedQuery = queries[queryIndex];
-  console.log('Starting new session with query:', selectedQuery);
   currentSession = new GameSession(selectedQuery, queryIndex, playerName, selectedQuery.context);
 
   hideQueries();
@@ -311,7 +297,6 @@ function hideQueries() {
 }
 
 function updateGameState(index) {
-  console.log("Impact: " + card.impact + " Score: " + currentSession.score)
   // currentSession.score = currentSession.position - queries;
 }
 
@@ -470,7 +455,6 @@ function displayCards(cards) {
 
 function cardClickHandler(event) {
   if (currentSession.gameOver) {
-    console.log('The game is over. Please start a new game.');
     return;
   }
 
@@ -499,7 +483,6 @@ function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score
   gameSessionsTable.insert([
     { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score, query: query, total_impact: total_impact }
   ]).then(result => {
-    console.log('Game session submitted to Supabase:', result);
   }).catch(error => {
     console.error('Error submitting game session to Supabase:', error);
   });
