@@ -513,7 +513,7 @@ function submitGameSessionToSupabase(playerName, query, cards) {
   const gameSessionsTable = sp.from('Game_v2');
 
   gameSessionsTable.insert([
-    { player_name: playerName, query: query, cards: cards }
+    { player_name: playerName, query_id: query, cards: cards }
   ])
   .then(result => {
     // Handle success
