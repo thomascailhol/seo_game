@@ -236,9 +236,9 @@ function toggleRules() {
   rules.classList.toggle('hidden');
 }
 
-function startNewSession(queryIndex, playerName) {
+async function startNewSession(queryIndex, playerName) {
   const selectedQuery = queries[queryIndex];
-  const cards = collectCards(queries[queryIndex].id);
+  const cards = await collectCards(queries[queryIndex].id);
   currentSession = new GameSession(selectedQuery, queryIndex, playerName, selectedQuery.context, cards);
 
   hideQueries();
