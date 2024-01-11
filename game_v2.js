@@ -46,7 +46,7 @@ class GameSession {
   }
 
   chooseCard(index) {
-    const card = this.query.cards[index];
+    const card = this.cards[index];
     this.usedCards.push(card);
     if (card.impact === -666) {
       this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
