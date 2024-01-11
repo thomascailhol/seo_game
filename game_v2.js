@@ -61,7 +61,7 @@ class GameSession {
         this.endGame('first_place');
       } else if (this.usedCards.length === 6 && this.position > 10) {
         this.endGame('lost');
-      } else if (this.usedCards.length =gi== 6 && this.position <= 3) {
+      } else if (this.usedCards.length === 6 && this.position <= 3) {
         this.endGame('top_3');
       } else if (this.usedCards.length === 6 && this.position > 3) {
         this.endGame('top_10');
