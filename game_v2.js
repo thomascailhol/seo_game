@@ -90,7 +90,6 @@ class GameSession {
     }
 
     submitGameSessionToSupabase(this.playerName, this.query.id, this.usedCards);
-    collectScore()
   }
 
 
