@@ -31,8 +31,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 class GameSession {
-  constructor(query, queryIndex, playerName, context) {
+  constructor(query, queryIndex, playerName, context, cards) {
     this.query = query;
+    this.cards = cards;
     this.numberOfResults = query.ranking.results.length;
     this.score = 0;
     // this.position = query.ranking.results.length - 5;
@@ -237,10 +238,10 @@ function toggleRules() {
 
 function startNewSession(queryIndex, playerName) {
   const selectedQuery = queries[queryIndex];
-  currentSession = new GameSession(selectedQuery, queryIndex, playerName, selectedQuery.context);
+  const cards = collectCards(queries[currentSession.queryIndex].id);
+  currentSession = new GameSession(selectedQuery, queryIndex, playerName, selectedQuery.context, cards);
 
   hideQueries();
-  collectCards(queries[currentSession.queryIndex].id);
   // displayCards(queries[currentSession.queryIndex].id);
   displayContext(selectedQuery.context);
   // displayQuery(selectedQuery['name']);
@@ -263,7 +264,7 @@ function updateUsedCardsCount() {
 }
 
 function onCardChoice(index, cardElement) {
-  const impact = currentSession.query.cards[index].impact;
+  const impact = currentSession.cards[index].impact;
   currentSession.chooseCard(index);
   // find card element child with id game-card-inner and add class used
   cardElement.querySelector('.game-card-inner').classList.add('used');
@@ -430,6 +431,7 @@ async function collectCards(query_id) {
     cards = await fetchCards(query_id)
     console.log(cards)
     displayCards(cards);
+    return cards;
   } catch (error) {
     // Handle errors here if needed
     console.error('Error collecting cards:', error);
