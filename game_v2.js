@@ -515,17 +515,10 @@ function submitGameSessionToSupabase(playerName, query, cards) {
 
   gameSessionsTable.insert([
     { player_name: playerName, query_id: query, cards: cards }
-  ]).returning('*') 
+  ]).select()
   .then(result => {
     // Handle success
     console.log('Game session submitted successfully:', result);
-    if (result.data && result.data.length > 0) {
-      const newGameId = result.data[0].id;
-      console.log('Game session submitted successfully:', result);
-      console.log('New Game ID:', newGameId);
-
-      // Use newGameId for further operations
-    }
   })
   .catch(error => {
     // Handle error
