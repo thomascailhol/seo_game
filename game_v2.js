@@ -47,7 +47,7 @@ class GameSession {
 
   chooseCard(index) {
     const card = this.cards[index];
-    this.usedCards.push(card);
+    this.usedCards.push(card.uuid);
     if (card.impact === -666) {
       this.position = Math.max(1, Math.min(this.numberOfResults, this.position - card.impact));
       this.endGame('game_over');
@@ -61,7 +61,7 @@ class GameSession {
         this.endGame('first_place');
       } else if (this.usedCards.length === 6 && this.position > 10) {
         this.endGame('lost');
-      } else if (this.usedCards.length === 6 && this.position <= 3) {
+      } else if (this.usedCards.length =gi== 6 && this.position <= 3) {
         this.endGame('top_3');
       } else if (this.usedCards.length === 6 && this.position > 3) {
         this.endGame('top_10');
@@ -89,7 +89,7 @@ class GameSession {
       this.displayEndGame('lost', 'Tu peux mieux faire ! Tu as terminé le SEO Game à la position ' + this.position + ' ! Tu obtiens ' + this.score + ' points !');
     }
 
-    submitGameSessionToSupabase(this.playerName, this.position, this.usedCards.length, this.score, this.query.name, this.score);
+    submitGameSessionToSupabase(this.playerName, this.query.id, this.usedCards);
   }
 
 
@@ -509,13 +509,18 @@ function hideRules() {
   rules.classList.add('hidden');
 }
 
-function submitGameSessionToSupabase(playerName, finalPosition, cardsUsed, score, query, total_impact) {
-  const gameSessionsTable = sp.from('Game');
+function submitGameSessionToSupabase(playerName, query, cards) {
+  const gameSessionsTable = sp.from('Game_v2');
 
   gameSessionsTable.insert([
-    { player_name: playerName, final_position: finalPosition, cards_used: cardsUsed, computed_score: score, query: query, total_impact: total_impact }
-  ]).then(result => {
-  }).catch(error => {
+    { player_name: playerName, query: query, cards: cards }
+  ])
+  .then(result => {
+    // Handle success
+    console.log('Game session submitted successfully:', result);
+  })
+  .catch(error => {
+    // Handle error
     console.error('Error submitting game session to Supabase:', error);
   });
 }
