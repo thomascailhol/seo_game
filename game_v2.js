@@ -518,6 +518,7 @@ function submitGameSessionToSupabase(playerName, query, cards) {
   .then(result => {
     // Handle success
     console.log('Game session submitted successfully:', result);
+    let game_id = result.data[0].id;
   })
   .catch(error => {
     // Handle error
