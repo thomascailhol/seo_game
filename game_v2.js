@@ -240,7 +240,8 @@ function startNewSession(queryIndex, playerName) {
   currentSession = new GameSession(selectedQuery, queryIndex, playerName, selectedQuery.context);
 
   hideQueries();
-  displayCards(queries[currentSession.queryIndex].cards);
+  collectCards(queries[currentSession.queryIndex].id);
+  // displayCards(queries[currentSession.queryIndex].id);
   displayContext(selectedQuery.context);
   // displayQuery(selectedQuery['name']);
   currentSession.score = 0;
@@ -404,6 +405,35 @@ function generateFakeGoogleResults(count) {
     fakeResults.push('Result ' + (i + 1));
   }
   return fakeResults;
+}
+
+async function fetchCards(query_id) {
+  const cardTable = sp.from('Card_v2');
+
+  try {
+    let { data, error } = await cardTable
+      .select("*")
+      .eq('query_id', query_id)
+
+    if (error) throw error;
+
+    // find playerName column value from games
+    return data;
+  } catch (err) {
+    console.error('Error retrieving cards from Supabase:', err);
+    throw err; // Re-throw the error to be handled elsewhere if needed
+  }
+}
+
+async function collectCards(query_id) {
+  try {
+    cards = await fetchCards(query_id)
+    console.log(cards)
+    displayCards(cards);
+  } catch (error) {
+    // Handle errors here if needed
+    console.error('Error collecting cards:', error);
+  }
 }
 
 function displayCards(cards) {
