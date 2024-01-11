@@ -238,7 +238,7 @@ function toggleRules() {
 
 function startNewSession(queryIndex, playerName) {
   const selectedQuery = queries[queryIndex];
-  const cards = collectCards(queries[currentSession.queryIndex].id);
+  const cards = collectCards(queries[queryIndex].id);
   currentSession = new GameSession(selectedQuery, queryIndex, playerName, selectedQuery.context, cards);
 
   hideQueries();
