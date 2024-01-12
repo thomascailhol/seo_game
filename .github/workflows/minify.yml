@@ -25,6 +25,7 @@ jobs:
 
       # Perform minification, overwriting original files
       - run: terser ./game_v2.js --compress --mangle -o ./game_v2.js
+      - run: terser ./game.js --compress --mangle -o ./game.js
 
       # (Force) push changes to `gh-pages` branch
       - run: |
