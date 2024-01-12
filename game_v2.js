@@ -525,3 +525,20 @@ function submitGameSessionToSupabase(playerName, query, cards) {
     console.error('Error submitting game session to Supabase:', error);
   });
 }
+
+function collectScore(game_id) {
+  const scoreTable = sp.from('Score_v2');
+
+  scoreTable.select('*')
+  .eq('game_id', game_id)
+  .then(result => {
+    // Handle success
+    console.log('Score collected successfully:', result);
+    let score = result.data[0].score;
+    displayScore(score);
+  })
+  .catch(error => {
+    // Handle error
+    console.error('Error collecting score from Supabase:', error);
+  });
+}
